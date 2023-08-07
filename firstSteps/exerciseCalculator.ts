@@ -52,17 +52,26 @@ const rateHours = (target: number, average: number): RateResult => {
   return { rating, ratingDescription };
 };
 
-const parseExerciseArguments = (args: string[]): ParsedHours => {
-  if (args.length < 4) throw new Error('Not enough arguments');
+export const parseExerciseArguments = (
+  target: number,
+  daily_exercises: number[]
+): ParsedHours => {
 
-  const target = Number(args[2]);
+
+  if (!target) {
+    throw new Error('Daily target missing');
+  }
+
+  if (daily_exercises.length < 1) {
+    throw new Error('Atleast 1 day is needed');
+  }
 
   if (isNaN(target)) {
     throw new Error('Target value was not a number');
   }
 
   // Makes an array of hours and check that they are numbers
-  const hours = args.slice(3).map((hour) => {
+  const hours = daily_exercises.map((hour) => {
     const parsedHour = Number(hour);
     if (isNaN(parsedHour)) {
       throw new Error('Training lenght was not a number');
@@ -75,7 +84,10 @@ const parseExerciseArguments = (args: string[]): ParsedHours => {
   };
 };
 
-const calculateExercises = (target: number, ...args: number[]): Result => {
+export const calculateExercises = (
+  target: number,
+  ...args: number[]
+): Result => {
   const periodLength = args.length;
   const trainingDays = args.filter((num) => num > 0).length;
   const average = calculateAverage(args);
@@ -93,13 +105,13 @@ const calculateExercises = (target: number, ...args: number[]): Result => {
   };
 };
 
-try {
-  const { target, hours } = parseExerciseArguments(process.argv);
-  console.log(calculateExercises(target, ...hours));
-} catch (error: unknown) {
-  let errorMessage = 'Something bad happened.';
-  if (error instanceof Error) {
-    errorMessage += ' Error: ' + error.message;
-  }
-  console.log(errorMessage);
-}
+// try {
+//   const { target, hours } = parseExerciseArguments(process.argv);
+//   console.log(calculateExercises(target, ...hours));
+// } catch (error: unknown) {
+//   let errorMessage = 'Something bad happened.';
+//   if (error instanceof Error) {
+//     errorMessage += ' Error: ' + error.message;
+//   }
+//   console.log(errorMessage);
+// }
