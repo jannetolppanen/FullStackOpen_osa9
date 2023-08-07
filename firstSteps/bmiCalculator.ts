@@ -5,7 +5,7 @@ interface bmiValues {
 export const calculateBmi = (height: number, weight: number): string => {
   const heightInCentimeters = height / 100;
   const bmi = weight / (heightInCentimeters * heightInCentimeters);
-  let result = ''
+  let result = '';
 
   if (bmi < 18.5) {
     result = 'Underweight';
@@ -16,8 +16,8 @@ export const calculateBmi = (height: number, weight: number): string => {
   } else {
     result = 'Obese';
   }
-  console.log(result)
-  return result
+  console.log(result);
+  return result;
 };
 
 export const parseArguments = (height: string, weight: string): bmiValues => {
@@ -28,11 +28,11 @@ export const parseArguments = (height: string, weight: string): bmiValues => {
     return {
       height: Number(height),
       weight: Number(weight)
-    }
+    };
   } else {
     throw new Error('Provided values were not numbers!');
   }
-}
+};
 
 // try {
 //   const { height, weight } = parseArguments(process.argv)

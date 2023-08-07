@@ -1,5 +1,5 @@
 import express from 'express';
-import * as bmiCalc from './bmiCalculator'
+import * as bmiCalc from './bmiCalculator';
 
 const app = express();
 
@@ -11,18 +11,28 @@ app.get('/bmi', (req, res) => {
   const queryHeight = req.query.height as string;
   const queryWeight = req.query.weight as string;
 
-  if (!queryWeight || !queryHeight || queryWeight === '' || queryHeight === '') {
-    res.status(400).send({ error: "malformatted parameters" });
+  if (
+    !queryWeight ||
+    !queryHeight ||
+    queryWeight === '' ||
+    queryHeight === ''
+  ) {
+    res.status(400).send({ error: 'malformatted parameters' });
   }
 
   try {
-    const { height, weight } = bmiCalc.parseArguments(queryHeight, queryWeight)
-    const bmi = bmiCalc.calculateBmi(height, weight)
-    res.json({ weight, height, bmi })
-  } catch (error) {
-    res.status(500).send({ error: error.message });
+    const { height, weight } = bmiCalc.parseArguments(queryHeight, queryWeight);
+    const bmi = bmiCalc.calculateBmi(height, weight);
+    res.json({ weight, height, bmi });
+  } catch (error: unknown) {
+    let errorMessage = 'Something went wrong: ';
+    if (error instanceof Error) {
+      errorMessage += error.message;
+    }
+    res.status(500).send({ error: errorMessage });
   }
 });
+
 
 const PORT = 3003;
 

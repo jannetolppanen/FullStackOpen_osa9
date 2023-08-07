@@ -13,6 +13,11 @@ interface ParsedHours {
   hours: number[];
 }
 
+interface RateResult {
+  rating: number;
+  ratingDescription: string;
+}
+
 const calculateAverage = (args: number[]): number => {
   const length = args.length;
   const sum = args.reduce((sum, number) => {
@@ -21,7 +26,7 @@ const calculateAverage = (args: number[]): number => {
   return sum / length;
 };
 
-const rateHours = (target: number, average: number): any => {
+const rateHours = (target: number, average: number): RateResult => {
   let rating = 0;
   let ratingDescription = '';
   if (average < target) {
