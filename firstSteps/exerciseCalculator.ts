@@ -59,22 +59,22 @@ export const parseExerciseArguments = (
 
 
   if (!target) {
-    throw new Error('Daily target missing');
+    throw new Error('parameters missing');
   }
 
   if (daily_exercises.length < 1) {
-    throw new Error('Atleast 1 day is needed');
+    throw new Error('parameters missing');
   }
 
   if (isNaN(target)) {
-    throw new Error('Target value was not a number');
+    throw new Error('malformatted parameters');
   }
 
   // Makes an array of hours and check that they are numbers
   const hours = daily_exercises.map((hour) => {
     const parsedHour = Number(hour);
     if (isNaN(parsedHour)) {
-      throw new Error('Training lenght was not a number');
+      throw new Error('malformatted parameters');
     }
     return parsedHour;
   });

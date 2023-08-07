@@ -21,11 +21,11 @@ const dailyTarget = req.body.target
       res.json(result);
 
     } catch (error: unknown) {
-      let errorMessage = 'Something went wrong: ';
       if (error instanceof Error) {
-        errorMessage += error.message;
+        res.status(500).send({ error: error.message });
+      } else {
+        res.status(500).send({error: 'Something went wrong'});
       }
-      res.status(500).send({ error: errorMessage });
     }
       
 });
@@ -50,11 +50,11 @@ app.get('/bmi', (req, res) => {
     const bmi = bmiCalc.calculateBmi(height, weight);
     res.json({ weight, height, bmi });
   } catch (error: unknown) {
-    let errorMessage = 'Something went wrong: ';
     if (error instanceof Error) {
-      errorMessage += error.message;
+      res.status(500).send({ error: error.message });
+    } else {
+      res.status(500).send({error: 'Something went wrong'});
     }
-    res.status(500).send({ error: errorMessage });
   }
 });
 
