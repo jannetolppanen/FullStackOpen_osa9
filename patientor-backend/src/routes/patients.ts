@@ -7,8 +7,17 @@ router.get('/', (_req, res) => {
   res.send(patientService.getPatients());
 });
 
-// router.post('/', (_req, res) => {
-//   res.send('Saving a diary!');
-// });
+router.post('/', (req, res) => {
+  /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+  const { name, dateOfBirth, gender, occupation, ssn } = req.body;
+  const addedPatient = patientService.addPatient({
+    name,
+    dateOfBirth,
+    gender,
+    occupation,
+    ssn
+  });
+  res.json(addedPatient);
+});
 
 export default router;
