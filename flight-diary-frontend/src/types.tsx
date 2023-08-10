@@ -4,3 +4,5 @@ export interface Weather {
   weather: 'rainy' | 'sunny' | 'windy';
   visibility: 'good' | 'poor'
 }
+
+export type NewEntry = Omit<Weather, 'id'>

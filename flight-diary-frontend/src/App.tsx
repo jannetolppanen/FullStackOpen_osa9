@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Weather } from "./types";
-import { getAllDiaryEntries } from "./diaryService";
+import { getAllDiaryEntries, createEntry } from "./diaryService";
 import Diary from "./components/Diary";
+import Add from "./components/Add";
 
 const App = () => {
   const [DiaryEntries, setDiaryEntries] = useState<Weather[]>([])
@@ -16,6 +17,7 @@ const App = () => {
 
   return (
     <div>
+      <Add />
       <Diary entries={DiaryEntries} />
     </div>
 
