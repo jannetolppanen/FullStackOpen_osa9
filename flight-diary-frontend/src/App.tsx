@@ -1,23 +1,22 @@
-import axios from "axios";
+import { useState, useEffect } from "react";
+import { Weather } from "./types";
+import { getAllDiaryEntries } from "./diaryService";
+import Diary from "./components/Diary";
 
 const App = () => {
+  const [DiaryEntries, setDiaryEntries] = useState<Weather[]>([])
 
-  interface Weather {
-    id: number;
-    date: string;
-    weather: 'rainy' | 'sunny' | 'windy';
-    visibility: 'good' | 'poor'
+  useEffect(() => {
+    getAllDiaryEntries().then(data => {
+      setDiaryEntries(data)
+    })
+    },[])
 
-  }
-
-  axios.get('http://localhost:3000/api/diaries').then(response => {
-    console.log(response.data)
-  })
 
 
   return (
     <div>
-      <h1>flight-diary-frontend</h1>
+      <Diary entries={DiaryEntries} />
     </div>
 
   );
