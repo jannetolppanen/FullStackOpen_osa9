@@ -24,7 +24,6 @@ interface DiaryEntryCreationProps {
     }
 
     diaryEntryCreation(newEntry)
-    console.log('yeet')
 
     setDate('')
     setWeather('')
@@ -36,7 +35,6 @@ interface DiaryEntryCreationProps {
   return (
     <div>
 
-    <h1>Add new Entry</h1>
     <form onSubmit={handleSubmit}>
       <div>
         <label>Date: </label>
