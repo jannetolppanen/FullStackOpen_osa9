@@ -19,7 +19,7 @@ const App = () => {
     fontWeight: 'bold',
     width: 'fit-content',
     maxWidth: '80%',
-  }
+  };
 
   useEffect(() => {
     getAllDiaryEntries().then((data) => {
@@ -29,32 +29,25 @@ const App = () => {
 
   const diaryEntryCreation = async (object: NewEntry) => {
     try {
-      const result = await createEntry(object)
-      setDiaryEntries(DiaryEntries.concat(result))
+      const result = await createEntry(object);
+      setDiaryEntries(DiaryEntries.concat(result));
     } catch (e) {
       if (axios.isAxiosError(e)) {
-        setErrorMessage(e.response?.data)
+        setErrorMessage(e.response?.data);
         setTimeout(() => {
-          setErrorMessage('')
+          setErrorMessage('');
         }, 5000);
-
-      }
-      else(console.log(e))
+      } else console.log(e);
     }
-      
   };
 
   return (
     <div>
       <h1>Add new entry</h1>
 
-      {errorMessage && 
-      <div style={error}>
-      {errorMessage}
-      </div>
-      }
+      {errorMessage && <div style={error}>{errorMessage}</div>}
       <Add diaryEntryCreation={diaryEntryCreation} />
-      
+
       <Diary entries={DiaryEntries} />
     </div>
   );
