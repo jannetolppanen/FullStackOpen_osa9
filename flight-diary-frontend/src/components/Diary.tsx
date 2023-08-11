@@ -10,7 +10,7 @@ const Diary = ( {entries}: {entries: FlightDiaryEntry[]}) => {
           <h2>{day.date}</h2>
           <p>visibility: {day.visibility} <br /> 
           weather: {day.weather} <br />
-          comment: {day.comment && day.comment}
+          {/* comment: {day.comment && day.comment} */}
           </p>
 
         </div>

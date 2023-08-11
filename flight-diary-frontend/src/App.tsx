@@ -3,7 +3,7 @@ import { NewEntry, FlightDiaryEntry } from './types';
 import { getAllDiaryEntries, createEntry } from './diaryService';
 import Diary from './components/Diary';
 import Add from './components/Add';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 
 const App = () => {
   const [DiaryEntries, setDiaryEntries] = useState<FlightDiaryEntry[]>([]);
