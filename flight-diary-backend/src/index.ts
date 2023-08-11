@@ -6,7 +6,7 @@ app.use(cors());
 app.use(express.json());
 
 import diaryRouter from './routes/diaries';
-const PORT = 3000;
+const PORT = 3001;
 
 app.get('/ping', (_req, res) => {
   console.log('someone pinged here');

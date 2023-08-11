@@ -1,24 +1,80 @@
 import { useState } from 'react'
+import { NewEntry } from '../types'
 
-const Add = () => {
-  const [date, setDate] = useState<string>('')
-const handleSubmit = (event: React.SyntheticEvent) => {
-
-  event.preventDefault()
-  console.log('making new entry')
+interface DiaryEntryCreationProps {
+  diaryEntryCreation: (object: NewEntry) => void;
 }
+
+// eslint-disable-next-line react/prop-types
+// const Add: React.FC<DiaryEntryCreationProps> = ({ diaryEntryCreation }) => {
+  const Add = ({diaryEntryCreation}: DiaryEntryCreationProps) => {
+  const [date, setDate] = useState<string>('')
+  const [weather, setWeather] = useState<string>('')
+  const [visibility, setVisibility] = useState<string>('')
+  const [comment, setComment] = useState<string>('')
+
+  const handleSubmit = (event: React.SyntheticEvent) => {
+    event.preventDefault()
+
+    const newEntry: NewEntry = {
+      date,
+      weather,
+      visibility,
+      comment
+    }
+
+    diaryEntryCreation(newEntry)
+    console.log('yeet')
+
+    setDate('')
+    setWeather('')
+    setVisibility('')
+    setComment('')
+  };
+
 
   return (
     <div>
 
     <h1>Add new Entry</h1>
     <form onSubmit={handleSubmit}>
-        <input
+      <div>
+        <label>Date: </label>
+        <input 
+          type="date" 
           value={date}
-          onChange={(event) => setDate(event.target.value)}
+          onChange={(e) => setDate(e.target.value)}
         />
-        <button type='submit'>add</button>
-      </form>
+      </div>
+
+      <div>
+        <label>Weather: </label>
+        <input 
+          type="text" 
+          value={weather}
+          onChange={(e) => setWeather(e.target.value)}
+        />
+      </div>
+
+      <div>
+        <label>Visibility: </label>
+        <input 
+          type="text" 
+          value={visibility}
+          onChange={(e) => setVisibility(e.target.value)}
+        />
+      </div>
+
+      <div>
+        <label>Comment: </label>
+        <input type="text" 
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+        />
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
     </div>
 
   )

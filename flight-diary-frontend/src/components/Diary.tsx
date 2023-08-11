@@ -1,6 +1,6 @@
-import { Weather } from "../types"
+import { FlightDiaryEntry } from "../types"
 
-const Diary = ( {entries}: {entries: Weather[]}) => {
+const Diary = ( {entries}: {entries: FlightDiaryEntry[]}) => {
   return (
     <div>
       <h1>Diary entries</h1>

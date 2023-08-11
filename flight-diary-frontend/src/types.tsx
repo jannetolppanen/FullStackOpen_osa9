@@ -1,8 +1,13 @@
-export interface Weather {
+export interface FlightDiaryEntry {
   id: number;
   date: string;
-  weather: 'rainy' | 'sunny' | 'windy';
-  visibility: 'good' | 'poor'
+  weather: string;
+  visibility: string;
+  comment?: string;
 }
 
-export type NewEntry = Omit<Weather, 'id'>
+export type NewEntry = Omit<FlightDiaryEntry, 'id'>
+
+export interface AddProps {
+  diaryEntryCreation: (entry: NewEntry) => void;
+}
