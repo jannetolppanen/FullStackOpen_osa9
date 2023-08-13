@@ -5,13 +5,14 @@ import { Patient, PatientWithoutSSN, newPatientEntry } from '../types';
 
 const patients: Patient[] = patientData;
 
-const getPatients = (): PatientWithoutSSN[] => {
-  return patients.map(({ id, name, dateOfBirth, gender, occupation, entries }) => ({
+const getPatients = (): Patient[] => {
+  return patients.map(({ id, name, dateOfBirth, gender, occupation, ssn, entries }) => ({
     id,
     name,
     dateOfBirth,
     gender,
     occupation,
+    ssn,
     entries // added entries here
   }));
 };
