@@ -5,6 +5,7 @@ import FemaleIcon from '@mui/icons-material/Female';
 import TransgenderIcon from '@mui/icons-material/Transgender';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { Gender } from '../../types';
+import { EntryDetails } from './EntryDetails';
 
 interface Props {
   patients: Patient[];
@@ -32,6 +33,7 @@ const PatientInfo = ({ patients, diagnoses }: Props) => {
       break;
   }
 
+
   return (
     <div>
       <h2>
@@ -57,6 +59,11 @@ const PatientInfo = ({ patients, diagnoses }: Props) => {
           </div>
         ))}
       </div>
+      {
+        patient?.entries.map((entry, index) => (
+          <EntryDetails key={index} entry={entry} />
+        ))
+      }
     </div>
   );
 };
