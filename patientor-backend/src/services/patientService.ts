@@ -6,13 +6,18 @@ import { Patient, PatientWithoutSSN, newPatientEntry } from '../types';
 const patients: Patient[] = patientData;
 
 const getPatients = (): PatientWithoutSSN[] => {
-  return patients.map(({ id, name, dateOfBirth, gender, occupation }) => ({
+  return patients.map(({ id, name, dateOfBirth, gender, occupation, entries }) => ({
     id,
     name,
     dateOfBirth,
     gender,
     occupation,
+    entries // added entries here
   }));
+};
+
+const getPatientByID = (id: string): PatientWithoutSSN | undefined => {
+  return patients.find(patient => patient.id === id);
 };
 
 const addPatient = ( entry: newPatientEntry): Patient => {
@@ -28,4 +33,5 @@ const addPatient = ( entry: newPatientEntry): Patient => {
 export default {
   getPatients,
   addPatient,
+  getPatientByID
 };

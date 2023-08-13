@@ -18,6 +18,7 @@ const toNewPatientEntry = (object: unknown): newPatientEntry => {
       gender: parseGender(object.gender),
       occupation: parseOccupation(object.occupation),
       ssn: parseSSN(object.ssn),
+      entries: [] // added entries here
     };
     return newEntry;
   }
@@ -29,7 +30,6 @@ const isString = (text: unknown): text is string => {
 };
 
 const isDate = (date: string): boolean => {
-  console.log(Date.parse(date));
   return Boolean(Date.parse(date));
 };
 
