@@ -31,12 +31,28 @@ const PatientInfo = ({ patients }: Props) => {
       break;
   }
 
+
   return (
   <div>
     <h2>{patient?.name} {genderIcon}</h2>
     ssn: {patient?.ssn} <br />
     occupation: {patient?.occupation}
 
+    <h3>entries</h3>
+    <div>
+  {patient?.entries.map((p) => (
+    <div key={p.id}>
+      {p.date} {p.description} <br /> <br />
+
+      {p.diagnosisCodes?.map((d) => (
+        <li key={d}>{d}</li>
+      ))}
+
+    </div>
+  ))}
+</div>
+    
+  
     </div>
     )};
 
