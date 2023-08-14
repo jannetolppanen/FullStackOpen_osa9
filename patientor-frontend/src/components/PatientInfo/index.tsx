@@ -18,6 +18,13 @@ const PatientInfo = ({ patients, diagnoses }: Props) => {
 
   let genderIcon;
 
+  const divStyle = {
+    border: '1px dotted black',
+    borderRadius: "5px",
+    padding: "10px",
+    margin: "10px"
+  };
+
   switch (patient?.gender) {
     case Gender.Male:
       genderIcon = <MaleIcon />;
@@ -33,7 +40,6 @@ const PatientInfo = ({ patients, diagnoses }: Props) => {
       break;
   }
 
-
   return (
     <div>
       <h2>
@@ -42,7 +48,7 @@ const PatientInfo = ({ patients, diagnoses }: Props) => {
       ssn: {patient?.ssn} <br />
       occupation: {patient?.occupation}
       <h3>entries</h3>
-      <div>
+      {/* <div>
         {patient?.entries.map((p) => (
           <div key={p.id}>
             {p.date} {p.description} <br /> <br />
@@ -58,12 +64,12 @@ const PatientInfo = ({ patients, diagnoses }: Props) => {
             })}
           </div>
         ))}
-      </div>
-      {
-        patient?.entries.map((entry, index) => (
-          <EntryDetails key={index} entry={entry} />
-        ))
-      }
+      </div> */}
+      {patient?.entries.map((entry, index) => (
+        <div style={divStyle} key={index}>
+          <EntryDetails entry={entry} diagnoses={diagnoses} />
+        </div>
+      ))}
     </div>
   );
 };
