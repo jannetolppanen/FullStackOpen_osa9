@@ -25,15 +25,27 @@ export type PatientWithoutSSN = Omit<Patient, 'ssn'>;
 
 export type NonSensitivePatient = Omit<Patient, 'ssn' | 'entries'>;
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 
-interface BaseEntry {
+
+export type SickLeave = {
+  startDate: string;
+  endDate: string;
+};
+
+export interface Discharge {
+  date: string;
+  criteria: string;
+}
+
+export interface BaseEntry {
   id: string;
   description: string;
   date: string;
   specialist: string;
   diagnosisCodes?: Array<Diagnosis['code']>;
 }
+
+export type BaseEntryWithoutID = Omit<BaseEntry, 'id'>;
 
 export enum HealthCheckRating {
   'Healthy' = 0,
@@ -42,7 +54,7 @@ export enum HealthCheckRating {
   'CriticalRisk' = 3,
 }
 
-interface HealthCheckEntry extends BaseEntry {
+export interface HealthCheckEntry extends BaseEntry {
   type: 'HealthCheck';
   healthCheckRating: HealthCheckRating;
 }
@@ -68,3 +80,8 @@ export type Entry =
   | HospitalEntry
   | OccupationalHealthcareEntry
   | HealthCheckEntry;
+
+  // Define special omit for unions
+type UnionOmit<T, K extends string | number | symbol> = T extends unknown ? Omit<T, K> : never;
+// Define Entry without the 'id' property
+export type EntryWithoutId = UnionOmit<Entry, 'id'>;
